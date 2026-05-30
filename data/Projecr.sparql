@@ -1,0 +1,9 @@
+
+SELECT ?group ?groupLabel ?member ?memberLabel (COUNT(DISTINCT ?award) AS ?awardCount) WHERE {
+  ?group wdt:P31 wd:Q215380.  # Музыкальная группа
+  ?group wdt:P463 ?member.     # Участник группы
+  ?member wdt:P166 ?award.      # Награды участника
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+}
+GROUP BY ?group ?groupLabel ?member ?memberLabel
+ORDER BY DESC(?awardCount)
